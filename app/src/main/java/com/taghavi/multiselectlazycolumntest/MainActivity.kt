@@ -41,13 +41,19 @@ class MainActivity : ComponentActivity() {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { }
+                                .clickable {
+                                    items = items.mapIndexed { j, item ->
+                                        if (i == j) {
+                                            item.copy(isSelected = !item.isSelected)
+                                        } else item
+                                    }
+                                }
                                 .padding(16.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Text(text = items[i].title)
-                            if (items[i].isSelected){
+                            if (items[i].isSelected) {
                                 Icon(
                                     imageVector = Icons.Default.Check,
                                     contentDescription = "Selected",
